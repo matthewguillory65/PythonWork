@@ -7,10 +7,10 @@ from graph import Node
 class DrawableNode(object):
     '''drawable node'''
 
-    def __init__(self, graphnode):
+    def __init__(self, xn, yn):
         # astar vars
-        posx = graphnode.value[0]
-        posy = graphnode.value[1]
+        self.posx = xn
+        self.posy = yn
         self.adjacents = []
         self.parent = None
         self._walkable = True
@@ -23,15 +23,15 @@ class DrawableNode(object):
         self.width = SIZE
         self.height = SIZE
         self.id = id
-        self.index = (posx, posy)
-        self.x = (5 + self.width) * posx + 5
-        self.y = (5 + self.height) * posy + 5
-        self.pos = (self.width * posx, self.height * posy)
+        self.index = (self.posx, self.posy)
+        self.x = (5 + self.width) * self.posx + 5
+        self.y = (5 + self.height) * self.posy + 5
+        self.pos = (self.width * self.posx, self.height * self.posy)
         self.screenpos = (self.x, self.y)
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.surface = pygame.Surface((self.width, self.height))
         self.dirty = False
-        self._color =  (125, 255, 255)
+        self._color =  (123, 125, 125)
 
     # properties
     @property
@@ -41,14 +41,14 @@ class DrawableNode(object):
     @walkable.setter
     def walkable(self, value):
         white = (255, 255, 255)
-        red = (255, 0, 0)
+        red = (125, 60, 152)
         self._walkable = value
         # if it's set to walkable change to white
         # this will mark it as undirty
         if value:
             self.color = (255, 255, 255)
         else:
-            self.color = (255, 0, 0)
+            self.color = (125, 60, 152)
 
     @property
     def f(self):
