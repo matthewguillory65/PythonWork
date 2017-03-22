@@ -31,7 +31,7 @@ class DrawableNode(object):
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.surface = pygame.Surface((self.width, self.height))
         self.dirty = False
-        self._color =  (123, 125, 125)
+        self._color =  (125, 125, 125)
 
     # properties
     @property
@@ -46,7 +46,7 @@ class DrawableNode(object):
         # if it's set to walkable change to white
         # this will mark it as undirty
         if value:
-            self.color = (255, 255, 255)
+            self.color = (125, 125, 125)
         else:
             self.color = (125, 60, 152)
 
@@ -83,7 +83,7 @@ class DrawableNode(object):
     @color.setter
     # manual setting of colors will mark them dirty so they will stay
     def color(self, value):
-        white = (255, 255, 255)
+        white = (125, 125, 125)
         red = (255, 0, 0)
 
         if value is red:
