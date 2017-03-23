@@ -4,6 +4,8 @@ import sys
 import drawablenode
 from drawablenode import *
 import random
+import math
+
 # Initialize the game engine
 pygame.init()
 
@@ -14,12 +16,12 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PAD = (5, 5)
-ROWS = 15
-COLS = 15
+ROWS = 34
+COLS = 18
 WIDTH = 50
 HEIGHT = 50
-SCREEN_WIDTH = COLS * (PAD[0] + WIDTH) + PAD[1]
-SCREEN_HEIGHT = ROWS * (PAD[0] + HEIGHT) + PAD[1]
+SCREEN_WIDTH = ROWS * (PAD[0] + WIDTH) + PAD[1]
+SCREEN_HEIGHT = COLS * (PAD[0] + HEIGHT) + PAD[1]
 # Set the height and width of the SCREEN
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -57,12 +59,6 @@ for n in NODES:
 
 Start = NODES[str([0, 0])]
 End = NODES[str([10, 10])]
-
-'''NODES = []
-for i in range(ROWS):
-    for j in range(COLS):
-        node = search_space.get_node([i, j])
-        NODES.append(DrawableNode(node))'''
 
 pygame.display.set_caption("Example code for the draw module")
 
@@ -121,30 +117,26 @@ while not DONE:
         if pygame.key.get_pressed()[pygame.K_w]: #When the w key is pressed, move up
             if selnode.posy - 1 >= 0:
                 selnode = NODES[str([selnode.posx, selnode.posy - 1])]
-                print "w"
+                print "Up"
 
         if pygame.key.get_pressed()[pygame.K_a]: #When the a key is pressed, move left
             if selnode.posx - 1 >= 0:
                 selnode = NODES[str([selnode.posx - 1, selnode.posy])]
-                print "a"
+                print "Left"
 
         if pygame.key.get_pressed()[pygame.K_s]: #When the s key is pressed, move down
-            if selnode.posy + 1 < ROWS:
+            if selnode.posy + 1 < COLS:
                 selnode = NODES[str([selnode.posx, selnode.posy + 1])]
-                print "s"
+                print "Down"
 
         if pygame.key.get_pressed()[pygame.K_d]: #When the d key is pressed, move right
-            if selnode.posx + 1 < COLS:
+            if selnode.posx + 1 < ROWS:
                 selnode = NODES[str([selnode.posx + 1, selnode.posy])]
-                print "d"
+                print "Right"
 
-        if pygame.key.get_pressed()[pygame.K_SPACE]:
+        if event.type == pygame.MOUSEBUTTONDOWN:
             selnode.walkable = not selnode.walkable
             print "SpaceBar Pressed"
-
-        if pygame.key.get_pressed()[pygame.K_b]:
-            Start = selnode
-            print "Start"
 
         if pygame.key.get_pressed()[pygame.K_n]:
             End = selnode
@@ -159,11 +151,24 @@ while not DONE:
                 NODES[n].parent = None
             print "End"
 
+        if pygame.key.get_pressed()[pygame.K_b]:
+            Start = selnode
+            openList = []
+            closedList = []
+            openList.append(Start)
+            currentnode = Start
+            for n in NODES:
+                NODES[n].g = 0
+                NODES[n].h = 0
+                NODES[n].f = 0
+                NODES[n].parent = None
+            print "Start"
+
     # All drawing code happens after the for loop and but
     # inside the main while DONE==False loop.
 
     # Clear the SCREEN and set the SCREEN background
-    SCREEN.fill(WHITE)
+    SCREEN.fill(BLACK)
     # Draw a circle
     for i in NODES:
         NODES[i].draw(SCREEN, font1)
@@ -176,7 +181,7 @@ while not DONE:
     #Draw the lines
     for n in NODES:
         if NODES[n].parent:
-            pygame.draw.line(SCREEN, (random.randrange(100, 240), random.randrange(100, 240), random.randrange(100, 240)), (NODES[n].screenpos[0] + 25, NODES[n].screenpos[1] + 25), (NODES[n].parent.screenpos[0] + 25, NODES[n].parent.screenpos[1] + 25), 4)
+            pygame.draw.line(SCREEN, (random.randrange(0, 240), random.randrange(0, 240), random.randrange(0, 240)), (NODES[n].screenpos[0] + 25, NODES[n].screenpos[1] + 25), (NODES[n].parent.screenpos[0] + 25, NODES[n].parent.screenpos[1] + 25), 4)
 
     if End.parent:
         tmp = End
