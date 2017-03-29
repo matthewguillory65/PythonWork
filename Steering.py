@@ -2,6 +2,7 @@ import pygame
 import math
 from VectorMath import *
 import random
+from GameAI import *
 
 # Initialize the game engine
 pygame.init()
@@ -24,12 +25,12 @@ CLOCK = pygame.time.Clock()
 Target = Vector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 circles = []
 
-for i in range(1000):
-    circles.append(Vector(random.randrange(SCREEN_WIDTH), random.randrange(SCREEN_HEIGHT)))
+for i in range(50):
+    circles.append(AIpoint(Vector(random.randrange(SCREEN_WIDTH), random.randrange(SCREEN_HEIGHT))))
 
 DONE = False
 while not DONE:
-    CLOCK.tick(15)
+    CLOCK.tick(25)
 
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
@@ -37,18 +38,20 @@ while not DONE:
         if event.type == pygame.MOUSEMOTION:
             Target.x, Target.y = pygame.mouse.get_pos()
 
-#Updates the circles that follow Target
-
-            
+    #Updates the circles that follow Target
+    for i in circles:
+        i.ApplyForce(i.Steering(Target))
+        i.UpdatePos()
+        
 
     # Clear the SCREEN and set the SCREEN background
     SCREEN.fill(BLACK)
     
     for i in circles:
-        pygame.draw.circle(SCREEN, (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256)), (i.x, i.y), 6)
-    pygame.draw.circle(SCREEN, ORANGE, (Target.x, Target.y), 3)
+        pygame.draw.circle(SCREEN, (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256)), (int(i.position.x), int(i.position.y)), 4)
+    pygame.draw.circle(SCREEN, RED, (Target.x, Target.y), 10)
 
-    bg = pygame.Surface((SCREEN.get_size()[0] / 3, SCREEN.get_size()[1] / 3))
+    bg = pygame.Surface((SCREEN.get_size()[0] / 3, SCREEN.get_size()[1] / 6))
     bg.fill(BLACK)
     textrect = bg.get_rect()
     pygame.display.flip()

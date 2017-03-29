@@ -22,13 +22,13 @@ class Vector(object):
     def y(self, value):
         self._y = value
 
-def Magnitude(x, y):
-    return math.sqrt(x * x + y * y)
+def Magnitude(Vec):
+    return math.sqrt(Vec.x * Vec.x + Vec.y * Vec.y)
 
-def Normalize(x, y):
-    Mag = Magnitude(x, y)
-    return Vector(x / Mag, y / Mag)
+def Normalize(Vec):
+    Mag = Magnitude(Vec)
+    return Vector(Vec.x / Mag, Vec.y / Mag)
 
-# class UpdateStuff(object):
-#     def __init__(self, dostuff)
-    
+def Velocity(Truncate):
+    return Truncate(Velocity + Steering, max_speed)
+
