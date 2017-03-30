@@ -27,7 +27,10 @@ def Magnitude(Vec):
 
 def Normalize(Vec):
     Mag = Magnitude(Vec)
-    return Vector(Vec.x / Mag, Vec.y / Mag)
+    if Mag > 0:
+        return Vector(Vec.x / Mag, Vec.y / Mag)
+    else:
+        return Vector(0, 0)
 
 def Velocity(Truncate):
     return Truncate(Velocity + Steering, max_speed)

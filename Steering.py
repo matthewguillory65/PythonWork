@@ -25,7 +25,7 @@ CLOCK = pygame.time.Clock()
 Target = Vector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 circles = []
 
-for i in range(50):
+for i in range(900):
     circles.append(AIpoint(Vector(random.randrange(SCREEN_WIDTH), random.randrange(SCREEN_HEIGHT))))
 
 DONE = False
@@ -48,8 +48,8 @@ while not DONE:
     SCREEN.fill(BLACK)
     
     for i in circles:
-        pygame.draw.circle(SCREEN, (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256)), (int(i.position.x), int(i.position.y)), 4)
-    pygame.draw.circle(SCREEN, RED, (Target.x, Target.y), 10)
+        pygame.draw.circle(SCREEN, (random.randrange(255, 256), random.randrange(255, 256), random.randrange(255, 256)), (int(i.position.x), int(i.position.y)), 5)
+    pygame.draw.circle(SCREEN, RED, (Target.x, Target.y), 15)
 
     bg = pygame.Surface((SCREEN.get_size()[0] / 3, SCREEN.get_size()[1] / 6))
     bg.fill(BLACK)
