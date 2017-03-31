@@ -134,7 +134,7 @@ while not DONE:
                 selnode = NODES[str([selnode.posx + 1, selnode.posy])]
                 print "Right"
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if pygame.key.get_pressed()[pygame.K_SPACE]:
             selnode.walkable = not selnode.walkable
             print "SpaceBar Pressed"
 
