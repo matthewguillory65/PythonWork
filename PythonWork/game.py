@@ -117,26 +117,21 @@ while not DONE:
         if pygame.key.get_pressed()[pygame.K_w]: #When the w key is pressed, move up
             if selnode.posy - 1 >= 0:
                 selnode = NODES[str([selnode.posx, selnode.posy - 1])]
-                print "Up"
 
         if pygame.key.get_pressed()[pygame.K_a]: #When the a key is pressed, move left
             if selnode.posx - 1 >= 0:
                 selnode = NODES[str([selnode.posx - 1, selnode.posy])]
-                print "Left"
 
         if pygame.key.get_pressed()[pygame.K_s]: #When the s key is pressed, move down
             if selnode.posy + 1 < COLS:
                 selnode = NODES[str([selnode.posx, selnode.posy + 1])]
-                print "Down"
 
         if pygame.key.get_pressed()[pygame.K_d]: #When the d key is pressed, move right
             if selnode.posx + 1 < ROWS:
                 selnode = NODES[str([selnode.posx + 1, selnode.posy])]
-                print "Right"
 
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             selnode.walkable = not selnode.walkable
-            print "SpaceBar Pressed"
 
         if pygame.key.get_pressed()[pygame.K_n]:
             End = selnode
@@ -149,7 +144,6 @@ while not DONE:
                 NODES[n].h = 0
                 NODES[n].f = 0
                 NODES[n].parent = None
-            print "End"
 
         if pygame.key.get_pressed()[pygame.K_b]:
             Start = selnode
@@ -162,7 +156,6 @@ while not DONE:
                 NODES[n].h = 0
                 NODES[n].f = 0
                 NODES[n].parent = None
-            print "Start"
 
     # All drawing code happens after the for loop and but
     # inside the main while DONE==False loop.
@@ -195,6 +188,7 @@ while not DONE:
     bg.fill(BLACK)
     textrect = bg.get_rect()
     pygame.display.flip()
+    
 
 # Be IDLE friendly
 pygame.quit()

@@ -25,7 +25,7 @@ deltatime = CLOCK.get_time()
 Target = Vector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 circles = []
 
-for i in range(1):
+for i in range(500):
     circles.append(AIpoint(Vector(random.randrange(SCREEN_WIDTH), random.randrange(SCREEN_HEIGHT))))
 
 DONE = False
@@ -44,16 +44,12 @@ while not DONE:
         i.UpdatePos()
         if i.position.x >= SCREEN_WIDTH:
             i.position.x = SCREEN_WIDTH
-            #i.velocity.x -= 1
         if i.position.y >= SCREEN_HEIGHT:
             i.position.y = SCREEN_HEIGHT
-            #i.velocity.y -= 1
         if i.position.x <= 0:
             i.position.x = 0
-            #i.velocity.x -= 1
         if i.position.y <= 0:
             i.position.y = 0
-            #i.velocity.y -= 1
         
 
     # Clear the SCREEN and set the SCREEN background
