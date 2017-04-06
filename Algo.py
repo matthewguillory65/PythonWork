@@ -1,12 +1,26 @@
 from tEST2 import *
 import pygame
+from drawablenode import *
 
 def Algorithem(start, end, graph):
-    
+    ROWS = 34
+    COLS = 18
+    NODES = {}
+    for i in range(ROWS):
+        for j in range(COLS):
+            NODES[str([i, j])] = DrawableNode(i, j)
+    start = NODES[str([0, 0])]
     openList = []
     closedList = []
+    currentnode = start
 
-    if openList and currentnode != End:
+    currentnode.g = 1
+    currentnode.h = abs(currentnode.posx - end.posx) + abs(currentnode.posy - end.posy)
+    currentnode.f = currentnode.g + currentnode.h
+    
+    openList.append(currentnode)
+
+    if openList and currentnode != end:
         currentnode = openList[0]
 
         openList.remove(currentnode)

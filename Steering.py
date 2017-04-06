@@ -30,7 +30,7 @@ for i in range(500):
 
 DONE = False
 while not DONE:
-    CLOCK.tick(60)
+    CLOCK.tick(40)
 
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
