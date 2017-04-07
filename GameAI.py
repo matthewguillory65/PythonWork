@@ -1,5 +1,6 @@
 import math
 import pygame
+import random
 from VectorMath import *
 
 class AIpoint(object):
@@ -21,9 +22,6 @@ class AIpoint(object):
         return Vel
 
     def ApplyForce(self, force, deltatime):
-        #Wandering
-        self.velocity.x = force.x / deltatime
-        self.velocity.y = force.y / deltatime
         #Seeking
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             self.velocity.x += force.x * deltatime
@@ -32,6 +30,13 @@ class AIpoint(object):
         if pygame.key.get_pressed()[pygame.K_n]:
             self.velocity.x -= force.x * deltatime * 2
             self.velocity.y -= force.y * deltatime * 2
+            #Wandering
+        Norm = Normalize(self.velocity)
+        Direc = random.randrange(314)
+        Newforce = Normalize(Vector(math.cos(Direc), math.sin(Direc)))
+        self.lastforce = Newforce
+        self.velocity.x += Newforce.x
+        self.velocity.y += Newforce.y
         if Magnitude(self.velocity) > self.max_speed:
             newVec = Normalize(self.velocity)
             self.velocity = Vector(newVec.x * self.max_speed, newVec.y * self.max_speed)
