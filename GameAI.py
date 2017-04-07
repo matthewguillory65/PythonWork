@@ -21,6 +21,9 @@ class AIpoint(object):
         return Vel
 
     def ApplyForce(self, force, deltatime):
+        #Wandering
+        self.velocity.x = force.x / deltatime
+        self.velocity.y = force.y / deltatime
         #Seeking
         if pygame.key.get_pressed()[pygame.K_SPACE]:
             self.velocity.x += force.x * deltatime
