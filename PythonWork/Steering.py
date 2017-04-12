@@ -13,10 +13,10 @@ WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 ORANGE = (255,165,0)
-RAINBOW = (random.randrange(100, 200), random.randrange(100, 200), random.randrange(100, 200))
+RAINBOW = (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256))
 RED = (255, 0, 0)
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 900
+SCREEN_WIDTH = 1900
+SCREEN_HEIGHT = 1000
 # Set the height and width of the SCREEN
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -25,7 +25,7 @@ deltatime = CLOCK.get_time()
 Target = Vector(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 circles = []
 
-for i in range(1000):
+for i in range(1):
     circles.append(AIpoint(Vector(random.randrange(SCREEN_WIDTH), random.randrange(SCREEN_HEIGHT))))
         
 
@@ -61,7 +61,7 @@ while not DONE:
     SCREEN.fill(BLACK)
     
     for i in circles:
-        pygame.draw.circle(SCREEN, (random.randrange(255, 256), random.randrange(255, 256), random.randrange(255, 256)), (int(i.position.x), int(i.position.y)), 10)
+        pygame.draw.circle(SCREEN, (random.randrange(0, 256), random.randrange(0, 256), random.randrange(0, 256)), (int(i.position.x), int(i.position.y)), 10)
     pygame.draw.circle(SCREEN, RED, (Target.x, Target.y), 15)
 
     bg = pygame.Surface((SCREEN.get_size()[0] / 3, SCREEN.get_size()[1] / 6))
