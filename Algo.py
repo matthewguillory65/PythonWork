@@ -1,42 +1,55 @@
 from tEST2 import *
-import pygame
-from drawablenode import *
 
-def Algorithem(start, end, graph):
-    ROWS = 34
-    COLS = 18
-    NODES = {}
-    for i in range(ROWS):
-        for j in range(COLS):
-            NODES[str([i, j])] = DrawableNode(i, j)
-    start = NODES[str([0, 0])]
-    openList = []
-    closedList = []
-    currentnode = start
+class Nodes():
+    def Node(self, position, ID):
+        self.Id = ID
+        self.GScore = 0
+        self.HScore = 0
+        self.FScore = 0
+        self.position = position
 
-    currentnode.g = 1
-    currentnode.h = abs(currentnode.posx - end.posx) + abs(currentnode.posy - end.posy)
-    currentnode.f = currentnode.g + currentnode.h
-    
-    openList.append(currentnode)
+class Graph():
+    def Graph(self, nodes):
+        nodes = []
+ 
+class CalcGScore():
+    def CalcgScore(self, current, neighbor):
+        #instead of making 2, verthori is the cost as vertical and horizontal
+        verthori = 10
+        diagonal = 14
+        if (current[0] + 1, current[1]) or (current[0], current[1] + 1) or (current[0] - 1, current[1]) or (current[0], current[1] - 1):
+            GScore = verthori
+        if (current[0] + 1, current[1] + 1) or (current[0] - 1, current[1] - 1) or (current[0] + 1, current[1] - 1) or (current[0] - 1, current[1] + 1):
+            GScore = diagonal
 
-    if openList and currentnode != end:
-        currentnode = openList[0]
+class CalcHScore():
+    def CalchScore(self, node, goal):
+        HScore = abs(node.posx - goal.posx) + abs(node.posy - goal.posy)
 
-        openList.remove(currentnode)
-        closedList.append(currentnode)
+class CalcFScore():
+    def CalcfScore(self, node):
+        node.FScore = node.GScore + node.HScore
 
-        for neighbors in currentnode.adjacents:
-            if neighbors not in closedList and neighbors.walkable:
-                if neighbors not in openList:
-                    openList.append(neighbors)
-                neighbors.g = 1 + currentnode.g
-                neighbors.h = abs(neighbors.posx - End.posx) + abs(neighbors.posy - End.posy)
-                neighbors.f = neighbors.g + neighbors.h
-                if neighbors.parent:
-                    if neighbors.parent.g > currentnode.g:
-                        neighbors.parent = currentnode
-                else:
-                    neighbors.parent = currentnode
+class GetNeighbors():
+    def Getneighbors(self, node, nodes):
+        #The node needs to be in the graph and if it is, get neighbors
+        current = node
+        right = (current[0] + 1, current[1])
+        left = (current[0] - 1, current[1])
+        up = (current[0], current[1] + 1)
+        down = (current[0], current[1] - 1)
+        up_right = (current[0] + 1, current[1] + 1)
+        up_left = (current[0] - 1, current[1] + 1)
+        down_right = (current[0] + 1, current[1] - 1)
+        down_left = (current[0] - 1, current[1] - 1)
 
-        openList.sort(key = lambda n: n.f)
+class AStar():
+    def Astar(self, start, goal, graph):
+        #All the stuff
+        #returns a list ehich is the path returned
+        graph = list(GRAPH)
+        openList = []
+        closedList = []
+        pathway = []
+        openList.append(start)
+        openList.sort(key=lambda x: x.f)

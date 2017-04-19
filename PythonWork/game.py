@@ -33,29 +33,29 @@ for i in range(ROWS):
 
 for n in NODES:
     # Right
-    if str([NODES[n].posx + 1,NODES[n].posy]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1,NODES[n].posy])])
+    if str([NODES[n].posx + 1, NODES[n].posy]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1, NODES[n].posy])])
     # Up-Right
-    if str([NODES[n].posx + 1,NODES[n].posy + 1]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1,NODES[n].posy + 1])])
+    if str([NODES[n].posx + 1, NODES[n].posy + 1]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1, NODES[n].posy + 1])])
     # Up
     if str([NODES[n].posx, NODES[n].posy + 1]) in NODES:
         NODES[n].adjacents.append(NODES[str([NODES[n].posx, NODES[n].posy + 1])])
     # Up-Left
-    if str([NODES[n].posx - 1,NODES[n].posy + 1]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1,NODES[n].posy + 1])])
+    if str([NODES[n].posx - 1, NODES[n].posy + 1]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1, NODES[n].posy + 1])])
     # Left
-    if str([NODES[n].posx - 1,NODES[n].posy]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1,NODES[n].posy])])
+    if str([NODES[n].posx - 1, NODES[n].posy]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1, NODES[n].posy])])
     # Down-Left
-    if str([NODES[n].posx - 1,NODES[n].posy - 1]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1,NODES[n].posy - 1])])
+    if str([NODES[n].posx - 1, NODES[n].posy - 1]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx - 1, NODES[n].posy - 1])])
     # Down
-    if str([NODES[n].posx,NODES[n].posy - 1]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx,NODES[n].posy - 1])])
+    if str([NODES[n].posx, NODES[n].posy - 1]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx, NODES[n].posy - 1])])
     # Down-Right
-    if str([NODES[n].posx + 1,NODES[n].posy - 1]) in NODES:
-        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1,NODES[n].posy - 1])])
+    if str([NODES[n].posx + 1, NODES[n].posy - 1]) in NODES:
+        NODES[n].adjacents.append(NODES[str([NODES[n].posx + 1, NODES[n].posy - 1])])
 
 Start = NODES[str([0, 0])]
 End = NODES[str([10, 10])]
