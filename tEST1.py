@@ -24,7 +24,7 @@ def main():
     # CalcFScore(nodeb)
     failcount = 0
     passcount = 0
-    for _ in range(100):
+    for _ in range(10):
         res = testfunc(Astar)
         if res:
             passcount += 1

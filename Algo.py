@@ -52,32 +52,35 @@ def CalcHScore(node, goal):
     # grid to the final destination, point B
     node.h = (abs(node.pos[0] - goal.pos[0]) +
               abs(node.pos[1] - goal.pos[1])) * 10
-    return node.h
+    
 
 
 def CalcFScore(node):
     # Gets the f score; G score + H score
     node.f = node.g + node.h
-    return node.f
+    
 
 
 def Getneighbors(node, graph):
     # The node needs to be in the graph and if it is, get neighbors
     current = node
-    right = (current[0] + 1, current[1])
-    left = (current[0] - 1, current[1])
-    up = (current[0], current[1] + 1)
-    down = (current[0], current[1] - 1)
-    up_right = (current[0] + 1, current[1] + 1)
-    up_left = (current[0] - 1, current[1] + 1)
-    down_right = (current[0] + 1, current[1] - 1)
-    down_left = (current[0] - 1, current[1] - 1)
+    right = (current[0] + 1, current[1]) #Goes right
+    left = (current[0] - 1, current[1]) #Goes left
+    up = (current[0], current[1] + 1) #Goes up
+    down = (current[0], current[1] - 1) #Goes down
+    up_right = (current[0] + 1, current[1] + 1) #Goes up and right
+    up_left = (current[0] - 1, current[1] + 1) #Goes up and left
+    down_right = (current[0] + 1, current[1] - 1) #Goes down and right
+    down_left = (current[0] - 1, current[1] - 1) #Goes down and left
     direc = [right, left, up, down, up_right, up_left, down_right, down_left]
+    neighbors = []
     for i in graph:
-        for position in graph:
-            if i[0] == position[0] and i[1] == position[1]:
-                node.neighbors.append(i)
-    return node.neighbors
+        for node in direc:
+            if i[0] == node[0] and i[1] == node[1]:
+                neighbors.append(i)
+                if i[0] != node[0] and i[1] != node[1]:
+                    neighbors.remove(i)
+    return neighbors
 
 
 def Astar(start, goal, graph):
@@ -96,7 +99,7 @@ def Astar(start, goal, graph):
         if currentNode == goal:
             path = Retrace(currentNode)
             return path
-        neighborsa = getneighbors(currentNode, graph)
+        neighborsa = Getneighbors(currentNode, graph)
         for m in neighborsa:
             if m in closedList or not m.walkable:
                 continue
@@ -110,14 +113,6 @@ def Astar(start, goal, graph):
             CalcHScore(currentNode, goal)
             CalcFScore(currentNode)
     return path
-    # for neighbors in currentNode.adjacents:
-    #     if neighbors not in closedList and neighbors.walkable:
-    #         if neighbors not in openList:
-    #             openList.append(neighbors)
-    #         CalcGScore(start, goal)
-    #         CalcHScore(currentNode, goal)
-    #         CalcFScore(currentNode)
-    #         neighbors.parent = currentNode
 
 
 def Retrace(node):
