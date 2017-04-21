@@ -6,20 +6,23 @@ class Node(object):
         self.g = 0
         self.h = 0
         self.f = self.g + self.h
+        self.adjacents = []
         self.walkable = True
         self.position = position
         self.parent = None
 
 class Grid(object):
-    def __init__(self, nodes, rows, cols):
+    def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
+        self.nodes = []
 
     def generatenodes(self):
-        
-
-#def Graph(self, nodes):
-#nodes = []
+        count = 0
+        for i in range(self.cols):
+            for j in range(self.rows):
+                count += 1
+                newnode = Node(count, [i, j])
 
 def CalcGScore(current, neighbor):
     #Gets the g score; Cost to move from the starting point A to a given square on the grid,
@@ -45,7 +48,7 @@ def CalcFScore(node):
   #Gets the f score; G score + H score
   node.f = node.g + node.h
 
-def Getneighbors(node, graph):
+def getneighbors(node, graph):
   #The node needs to be in the graph and if it is, get neighbors
   current = node
   right = (current[0] + 1, current[1])
@@ -65,14 +68,44 @@ def Getneighbors(node, graph):
 
 def Astar(start, goal, graph):
     #returns a list ehich is the path returned
-    graph = list(GRAPH)
     openList = []
     closedList = []
     currentNode = start
     openList.append(currentNode)
     openList.sort(key=lambda x: x.f)
 
-def Retrace(node):
+    if openList and currentNode != goal:
+        currentNode = openList[0]
+
+    while openList:
+        openList.remove(currentNode)
+        closedList.append(currentNode)
+    if currentNode == goal:
+        path = retrace(currentNode)
+        return path
+        neighborsa = getneighbors(currentNode, graph)
+        for m in neighborsa:
+            if m in closedList or m.walkable:
+                continue
+            tentative_g = m.g + CalcGScore(currentNode, m)
+            if m not in openList:
+                openList.append(m)
+            elif tentative_g >= m.g:
+                continue
+            m.parent = currentNode
+            CalcGScore(start, goal)
+            CalcHScore(currentNode, goal)
+            CalcFScore(currentNode)
+        # for neighbors in currentNode.adjacents:
+        #     if neighbors not in closedList and neighbors.walkable:
+        #         if neighbors not in openList:
+        #             openList.append(neighbors)
+        #         CalcGScore(start, goal)
+        #         CalcHScore(currentNode, goal)
+        #         CalcFScore(currentNode)
+        #         neighbors.parent = currentNode
+
+def retrace(node):
     final_path = []
     parentNode = node
     while parentNode is not None:

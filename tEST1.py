@@ -1,6 +1,6 @@
-# import tEST2
-# from tEST2 import testfunc
-# from tEST2 import getneighbors
+import tEST2
+from tEST2 import testfunc
+from tEST2 import getneighbors
 from Algo import *
 
 #to test your astar it must follow these conventions
@@ -21,6 +21,8 @@ def main():
     CalcGScore(node, nodeb)
     CalcHScore(nodeb, nodec)
     CalcFScore(nodeb)
+    grid = Grid(10, 10)
+    grid.generatenodes()
     failcount = 0
     passcount = 0
     for _ in range(100):
