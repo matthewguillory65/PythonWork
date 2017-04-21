@@ -14,15 +14,14 @@ from Algo import *
 #parameters: start, goal, graph
 #postconditions: function will return a list
 def main():
-    node = Node(1, [0, 0])
-    nodeb = Node(2, [3, 3])
-    nodec = Node(3, [4, 3])
+    '''This was the tests'''
+    # node = Node(1, [0, 0])
+    # nodeb = Node(2, [3, 3])
+    # nodec = Node(3, [4, 3])
     # nodeb.parent = nodec
-    CalcGScore(node, nodeb)
-    CalcHScore(nodeb, nodec)
-    CalcFScore(nodeb)
-    grid = Grid(10, 10)
-    grid.generatenodes()
+    # CalcGScore(node, nodeb)
+    # CalcHScore(nodeb, nodec)
+    # CalcFScore(nodeb)
     failcount = 0
     passcount = 0
     for _ in range(100):

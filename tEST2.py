@@ -1,5 +1,5 @@
 import math
-import Algo
+#import Algo
 
 class Node(object):
     '''data'''
