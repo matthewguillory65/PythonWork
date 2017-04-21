@@ -1,6 +1,6 @@
-from tEST2 import *
+#from tEST2 import *
 
-class Nodes(object):
+class Node(object):
     def __init__(self, ID, position):
         self.Id = ID
         self.g = 0
@@ -10,27 +10,40 @@ class Nodes(object):
         self.position = position
         self.parent = None
 
+class Grid(object):
+    def __init__(self, nodes, rows, cols):
+        self.rows = rows
+        self.cols = cols
+
+    def generatenodes(self):
+        
+
 #def Graph(self, nodes):
 #nodes = []
 
 def CalcGScore(current, neighbor):
     #Gets the g score; Cost to move from the starting point A to a given square on the grid,
     #following the the generated path to get there.
-    #instead of making 2, verthori is the cost as vertical and horizontal
-    if (current.position[0] == neighbor.position[0]) or (currnet.position[1] == neighbor.position[1])
-        g = current.g + 10
+    tentative = 0
+    if (current.position[0] == neighbor.position[0]) or (current.position[1] == neighbor.position[1]):
+        tentative = current.g + 10
     else:
-        g = current.g + 14
-    
+        tentative = current.g + 14
+    if neighbor.parent is None:
+        neighbor.g = tentative
+        neighbor.parent = current
+    if tentative < current.g:
+        neighbor.g = tentative
+        neighbor.parent = current
 
 def CalcHScore(node, goal):
   #Gets the h score; the estimated movement cost to move from that given square on the
   #grid to the final destination, point B
-  HScore = abs(node.posx - goal.posx) + abs(node.posy - goal.posy)
+  node.h = (abs(node.position[0] - goal.position[0]) + abs(node.position[1] - goal.position[1])) * 10
 
 def CalcFScore(node):
   #Gets the f score; G score + H score
-  node.FScore = node.GScore + node.HScore
+  node.f = node.g + node.h
 
 def Getneighbors(node, graph):
   #The node needs to be in the graph and if it is, get neighbors

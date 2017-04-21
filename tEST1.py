@@ -1,6 +1,6 @@
-import tEST2
-from tEST2 import testfunc
-from tEST2 import getneighbors
+# import tEST2
+# from tEST2 import testfunc
+# from tEST2 import getneighbors
 from Algo import *
 
 #to test your astar it must follow these conventions
@@ -14,6 +14,13 @@ from Algo import *
 #parameters: start, goal, graph
 #postconditions: function will return a list
 def main():
+    node = Node(1, [0, 0])
+    nodeb = Node(2, [3, 3])
+    nodec = Node(3, [4, 3])
+    # nodeb.parent = nodec
+    CalcGScore(node, nodeb)
+    CalcHScore(nodeb, nodec)
+    CalcFScore(nodeb)
     failcount = 0
     passcount = 0
     for _ in range(100):
