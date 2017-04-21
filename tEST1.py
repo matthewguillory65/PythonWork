@@ -17,7 +17,7 @@ def main():
     failcount = 0
     passcount = 0
     for _ in range(100):
-        res = testfunc(Algorithem)
+        res = testfunc(Astar)
         if res:
             passcount += 1
         else:
