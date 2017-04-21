@@ -78,8 +78,6 @@ def Getneighbors(node, graph):
         for node in direc:
             if i[0] == node[0] and i[1] == node[1]:
                 neighbors.append(i)
-                if i[0] != node[0] and i[1] != node[1]:
-                    neighbors.remove(i)
     return neighbors
 
 
